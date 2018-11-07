@@ -10,7 +10,7 @@ for DIR in ./ ./dev
 do
   pushd $DIR
   docker build \
-    --tag sia-image \
+    --tag siaprime-image \
     .
 
   export DUMMY_DATA_DIR=$(mktemp -d)
@@ -18,11 +18,11 @@ do
   # Run container in detached state
   docker run \
     --detach \
-    --publish 127.0.0.1:9980:9980 \
-    --volume "${DUMMY_DATA_DIR}:/sia-data" \
-    --env SIA_MODULES=cg \
-    --name sia-container \
-    sia-image
+    --publish 127.0.0.1:4280:4280 \
+    --volume "${DUMMY_DATA_DIR}:/siaprime-data" \
+    --env SIAPRIME_MODULES=cg \
+    --name siaprime-container \
+    siaprime-image
 
   sleep 5s
 
@@ -30,12 +30,12 @@ do
     (echo "Created consensus folder successfully" && exit 0)
   else
     (echo "Couldn't find consensus folder" && \
-      docker logs sia-container && \
+      docker logs siaprime-container && \
       exit 1)
   fi
 
-  curl -A "Sia-Agent" "http://localhost:9980/consensus"
+  curl -A "SiaPrime-Agent" "http://localhost:4280/consensus"
 
-  docker rm -f sia-container
+  docker rm -f siaprime-container
   popd
 done
