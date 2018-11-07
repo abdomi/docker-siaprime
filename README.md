@@ -1,6 +1,6 @@
 # docker-siaprime
 
-[![Build Status](https://travis-ci.org/mtlynch/docker-sia.svg?branch=master)](https://travis-ci.org/mtlynch/docker-sia) [![Docker Pulls](https://img.shields.io/docker/pulls/mtlynch/sia.svg?maxAge=604800)](https://hub.docker.com/r/mtlynch/sia/) [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](LICENSE)
+[![Build Status](https://travis-ci.org/abdomi/docker-siaprime.svg?branch=master)](https://travis-ci.org/abdomi/docker-siaprime) [![Docker Pulls](https://img.shields.io/docker/pulls/mtlynch/sia.svg?maxAge=604800)](https://hub.docker.com/r/mtlynch/sia/) [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](LICENSE)
 
 SiaPrime adapted version of the original Sia docker image created by mtlynch - https://github.com/mtlynch/docker-sia
 
