@@ -1,41 +1,28 @@
-FROM debian:jessie-slim
-LABEL maintainer="Omid_A <omid@kabal.se>"
+FROM golang AS builder
+LABEL maintainer="Omid A <omid@kabal.se>"
 
-ARG SIAPRIME_VERSION="1.3.5.1"
-ENV SIAPRIME_VERSION $SIAPRIME_VERSION
-ENV SIAPRIME_PACKAGE="SiaPrime-v${SIAPRIME_VERSION}-linux-amd64"
-ARG SIAPRIME_ZIP="${SIAPRIME_PACKAGE}.zip"
-ENV SIAPRIME_ZIP $SIAPRIME_ZIP
-ARG SIAPRIME_RELEASE="https://siaprime.net/releases/${SIAPRIME_ZIP}"
-ARG SIAPRIME_DIR="/siaprime"
-ENV SIAPRIME_DIR $SIAPRIME_DIR
+ENV GOOS linux
+ENV GOARCH amd64
+ENV CGO_ENABLED 0
+
+RUN go get -d -u gitlab.com/SiaPrime/... && \
+    cd $GOPATH/src/gitlab.com/SiaPrime && \
+    make release
+
+FROM alpine
+LABEL maintainer="Omid A <omid@kabal.se>"
+
+ENV SIAPRIME_DIR /siaprime
 ENV SIAPRIME_DATA_DIR="/siaprime-data"
 ENV SIAPRIME_MODULES gctwhr
 
-RUN apt-get update && apt-get install -y \
-  socat \
-  wget \
-  unzip
-
-RUN wget "$SIAPRIME_RELEASE" && \
-      mkdir "$SIAPRIME_DIR" && \
-      unzip -j "$SIAPRIME_ZIP" "${SIAPRIME_PACKAGE}/spc" -d "$SIAPRIME_DIR" && \
-      unzip -j "$SIAPRIME_ZIP" "${SIAPRIME_PACKAGE}/spd" -d "$SIAPRIME_DIR"
-
-# Clean up.
-RUN apt-get remove -y wget unzip && \
-    rm "$SIAPRIME_ZIP" && \
-    rm -rf /var/lib/apt/lists/* && \
-    rm -Rf /usr/share/doc && \
-    rm -Rf /usr/share/man && \
-    apt-get autoremove -y && \
-    apt-get clean
-
-EXPOSE 4280 4281 4282
+RUN apk --no-cache add socat
 
 WORKDIR "$SIAPRIME_DIR"
+COPY --from=builder /go/bin/spd ./
+COPY --from=builder go/bin/spc ./
 ENTRYPOINT socat tcp-listen:4280,reuseaddr,fork tcp:localhost:8000 & \
   ./spd \
     --modules "$SIAPRIME_MODULES" \
-    --siaprime-directory "$SIAPRIME_DATA_DIR" \
-    --api-addr "localhost:8000"
+    --sia-directory "$SIAPRIME_DATA_DIR" \
+--api-addr "localhost:8000"
