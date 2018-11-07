@@ -2,7 +2,7 @@ FROM debian:jessie-slim
 LABEL maintainer="Omid_A <omid@kabal.se>"
 
 ARG SIAPRIME_VERSION="1.3.5.1"
-ARG SIAPRIME_PACKAGE="Sia-v${SIAPRIME_VERSION}-linux-amd64"
+ARG SIAPRIME_PACKAGE="SiaPrime-v${SIAPRIME_VERSION}-linux-amd64"
 ARG SIAPRIME_ZIP="${SIAPRIME_PACKAGE}.zip"
 ARG SIAPRIME_RELEASE="https://siaprime.net/releases/${SIA_ZIP}"
 ARG SIAPRIME_DIR="/siaprime"
@@ -35,7 +35,7 @@ ENV SIAPRIME_DATA_DIR "$SIAPRIME_DATA_DIR"
 ENV SIAPRIME_MODULES gctwhr
 
 ENTRYPOINT socat tcp-listen:4280,reuseaddr,fork tcp:localhost:8000 & \
-  ./siad \
-    --modules "$SIA_MODULES" \
-    --sia-directory "$SIA_DATA_DIR" \
+  ./spd \
+    --modules "$SIAPRIME_MODULES" \
+    --sia-directory "$SIAPRIME_DATA_DIR" \
     --api-addr "localhost:8000"
