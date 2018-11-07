@@ -1,6 +1,6 @@
 # docker-siaprime
 
-[![Build Status](https://travis-ci.org/abdomi/docker-siaprime.svg?branch=master)](https://travis-ci.org/abdomi/docker-siaprime) [![Docker Pulls](https://img.shields.io/docker/pulls/mtlynch/sia.svg?maxAge=604800)](https://hub.docker.com/r/mtlynch/sia/) [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](LICENSE)
+[![Build Status](https://travis-ci.org/abdomi/docker-siaprime.svg?branch=master)](https://travis-ci.org/abdomi/docker-siaprime) [![Docker Pulls](https://img.shields.io/docker/pulls/abdomi/docker-siaprime.svg?maxAge=604800)](https://hub.docker.com/r/abdomi/docker-siaprime/) [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](LICENSE)
 
 SiaPrime adapted version of the original Sia docker image created by mtlynch - https://github.com/mtlynch/docker-sia
 
@@ -27,10 +27,10 @@ docker run \
 
 **Important**: Never publish port 4280 to all interfaces. This is a security-sensitive API, so only expose it beyond 127.0.0.1 if you know what you're doing.
 
-Once the container is running, you can execute siac from within the container:
+Once the container is running, you can execute spc from within the container:
 
 ```bash
-$ docker exec -it siaprime-container ./siac consensus
+$ docker exec -it siaprime-container ./spc consensus
 Synced: No
 Height: 2027
 Progress (estimated): 99.3%
