@@ -18,7 +18,7 @@ RUN wget "$SIAPRIME_RELEASE" && \
       unzip -j "$SIAPRIME_ZIP" "${SIAPRIME_PACKAGE}/spc" -d "$SIAPRIME_DIR" && \
       unzip -j "$SIAPRIME_ZIP" "${SIAPRIME_PACKAGE}/spd" -d "$SIAPRIME_DIR"
 
-# Clean up.
+# Clean up. 
 RUN apt-get remove -y wget unzip && \
     rm "$SIAPRIME_ZIP" && \
     rm -rf /var/lib/apt/lists/* && \
