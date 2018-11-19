@@ -37,5 +37,5 @@ ENV SIAPRIME_MODULES gctwhr
 ENTRYPOINT socat tcp-listen:4280,reuseaddr,fork tcp:localhost:8000 & \
   ./spd \
     --modules "$SIAPRIME_MODULES" \
-    --sia-directory "$SIAPRIME_DATA_DIR" \
+    --siaprime-directory "$SIAPRIME_DATA_DIR" \
 --api-addr "localhost:8000"
