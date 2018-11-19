@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
   wget \
   unzip
 
-RUN wget "$SIAPRIME_RELEASE" && \
+RUN wget "https://siaprime.net/releases/SiaPrime-v1.3.5.1-linux-amd64.zip" && \
       mkdir "$SIAPRIME_DIR" && \
       unzip -j "$SIAPRIME_ZIP" "${SIAPRIME_PACKAGE}/spc" -d "$SIAPRIME_DIR" && \
       unzip -j "$SIAPRIME_ZIP" "${SIAPRIME_PACKAGE}/spd" -d "$SIAPRIME_DIR"
