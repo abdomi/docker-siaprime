@@ -4,7 +4,7 @@ LABEL maintainer="Omid_A <omid@kabal.se>"
 ARG SIAPRIME_VERSION="1.3.5.1"
 ARG SIAPRIME_PACKAGE="SiaPrime-v${SIAPRIME_VERSION}-linux-amd64"
 ARG SIAPRIME_ZIP="${SIAPRIME_PACKAGE}.zip"
-ARG SIAPRIME_RELEASE="https://siaprime.net/releases/${SIA_ZIP}"
+ARG SIAPRIME_RELEASE="https://siaprime.net/releases/${SIAPRIME_ZIP}"
 ARG SIAPRIME_DIR="/siaprime"
 ARG SIAPRIME_DATA_DIR="/siaprime-data"
 
@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
   wget \
   unzip
 
-RUN wget "https://siaprime.net/releases/SiaPrime-v1.3.5.1-linux-amd64.zip" && \
+RUN wget "$SIAPRIME_RELEASE" && \
       mkdir "$SIAPRIME_DIR" && \
       unzip -j "$SIAPRIME_ZIP" "${SIAPRIME_PACKAGE}/spc" -d "$SIAPRIME_DIR" && \
       unzip -j "$SIAPRIME_ZIP" "${SIAPRIME_PACKAGE}/spd" -d "$SIAPRIME_DIR"
