@@ -6,4 +6,4 @@ deploy:
   provider: script
   script: ./trigger-docker-hub
   on:
-branch: master
+    branch: master
