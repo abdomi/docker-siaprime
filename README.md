@@ -8,7 +8,7 @@ SiaPrime adapted version of the original Sia docker image created by mtlynch - h
 
 * latest: The latest official binary release.
 * dev: The latest dev build from the SiaPrime Gitlab source.
-* 1.3.5.1
+* 1.3.5.2
 
 
 ## Usage
