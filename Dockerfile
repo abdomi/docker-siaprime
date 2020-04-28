@@ -1,10 +1,10 @@
 FROM debian:jessie-slim
 LABEL maintainer="Omid_A <omid@kabal.se>"
 
-ARG SIAPRIME_VERSION="1.4.1.3"
+ARG SIAPRIME_VERSION="1.4.2.0"
 ARG SIAPRIME_PACKAGE="ScPrime-v${SIAPRIME_VERSION}-linux-amd64"
 ARG SIAPRIME_ZIP="${SIAPRIME_PACKAGE}.zip"
-ARG SIAPRIME_RELEASE="https://siaprime.net/releases/${SIAPRIME_ZIP}"
+ARG SIAPRIME_RELEASE="https://scpri.me/releases/${SIAPRIME_ZIP}"
 ARG SIAPRIME_DIR="/siaprime"
 ARG SIAPRIME_DATA_DIR="/siaprime-data"
 
